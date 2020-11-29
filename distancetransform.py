@@ -3,7 +3,7 @@ import numpy as np
 import random as rng
 import matplotlib.pyplot as plt
 # Reading the image named 'input.jpg'
-input_image = cv.imread("cards.jpg")
+input_image = cv.imread("assets/cards.jpg")
 #input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
 input_image[np.all(input_image == 255, axis=2)] = 0
 kernel = np.array([[1, 1, 1], [1, -8, 1], [1, 1, 1]], dtype=np.float32)
@@ -34,54 +34,7 @@ dist = cv.distanceTransform(bw, cv.DIST_L2, 3)
 # so we can visualize and threshold it
 cv.normalize(dist, dist, 0, 1.0, cv.NORM_MINMAX)
 cv.imshow('Distance Transform Image', dist)
-cv.imwrite("distance_transform.jpg",dist)
-plt.imshow(dist,cmap="gray")
-plt.show()
-cv.imshow("cards",input_image)
+cv.imwrite("assets/distance_transform.jpg",dist)
 
-# Threshold to obtain the peaks
-# This will be the markers for the foreground objects
-_, dist = cv.threshold(dist, 0, 1.0, cv.THRESH_BINARY)
-# Dilate a bit the dist image
-kernel1 = np.ones((3,3), dtype=np.uint8)
-dist = cv.dilate(dist, kernel1)
-cv.imshow('Peaks', dist)
-
-# Create the CV_8U version of the distance image
-# It is needed for findContours()
-dist_8u = dist.astype('uint8')
-# Find total markers
-contours,_ = cv.findContours(dist_8u, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-# Create the marker image for the watershed algorithm
-markers = np.zeros(dist.shape, dtype=np.int32)
-# Draw the foreground markers
-for i in range(len(contours)):
-    cv.drawContours(markers, contours, i, (i+1), -1)
-# Draw the background marker
-cv.circle(markers, (5,5), 3, (255,255,255), -1)
-
-
-# Perform the watershed algorithm
-cv.watershed(imgResult, markers)
-#mark = np.zeros(markers.shape, dtype=np.uint8)
-mark = markers.astype('uint8')
-mark = cv.bitwise_not(mark)
-# uncomment this if you want to see how the mark
-# image looks like at that point
-#cv.imshow('Markers_v2', mark)
-# Generate random colors
-colors = []
-for contour in contours:
-    colors.append((rng.randint(0,256), rng.randint(0,256), rng.randint(0,256)))
-# Create the result image
-dst = np.zeros((markers.shape[0], markers.shape[1], 3), dtype=np.uint8)
-# Fill labeled objects with random colors
-for i in range(markers.shape[0]):
-    for j in range(markers.shape[1]):
-        index = markers[i,j]
-        if index > 0 and index <= len(contours):
-            dst[i,j,:] = colors[index-1]
-# Visualize the final image
-cv.imshow('Final Result', dst)
 cv.waitKey(0)
 cv.destroyAllWindows()
