@@ -25,7 +25,7 @@ def skeleton(img):
     return skel
 
 
-img = cv2.imread('hand.jpg', 0)
+img = cv2.imread('assets/hand.jpg', 0)
 plt.subplot(221)
 plt.title('Original image')
 plt.imshow(img, cmap='gray')
