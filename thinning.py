@@ -68,8 +68,8 @@ def thin_helper(image, image_pixels):
                 for j in range(1,image.size[1]-1):
                     compare_element(image, element, i, j, image_pixels)
     return image.copy()
-image,last_image=thin("kde.png")
-img=cv2.imread("kde.png")
+image,last_image=thin("assets/kde.png")
+img=cv2.imread("assets/kde.png")
 plt.subplot(121)
 plt.title('Original image')
 plt.imshow(img, cmap='gray')
