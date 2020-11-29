@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-path = 'number.jpg'
+path = 'assets/number.jpg'
 img = cv2.imread(path)
 img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 img=cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
