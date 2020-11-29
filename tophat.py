@@ -4,7 +4,7 @@ from skimage.morphology import disk
 # Getting the kernel to be used in Top-Hat
 kernel = np.ones((3,3),np.uint8)
 # Reading the image named 'input.jpg'
-input_image = cv2.imread("rice.jpg")
+input_image = cv2.imread("assets/rice.jpg")
 input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
 input_image1=input_image
 # Applying the Top-Hat operation
@@ -26,11 +26,11 @@ cv2.imshow("original", input_image)
 cv2.imshow("tophatt", tophatt_img)
 cv2.imshow("bottom_hatt",bottomhatt_img)
 cv2.imshow("final",final)
-cv2.imwrite("original_rice.jpg", input_image)
-cv2.imwrite("adaptive_threshold_rice.jpg",output)
-cv2.imwrite("tophat_rice.jpg",tophatt_img)
-cv2.imwrite("bottomhat_rice.jpg",bottomhatt_img)
-cv2.imwrite("final_rice.jpg",final)
+cv2.imwrite("assets/original_rice.jpg", input_image)
+cv2.imwrite("assets/adaptive_threshold_rice.jpg",output)
+cv2.imwrite("assets/tophat_rice.jpg",tophatt_img)
+cv2.imwrite("assets/bottomhat_rice.jpg",bottomhatt_img)
+cv2.imwrite("assets/final_rice.jpg",final)
 
 
 cv2.waitKey(0)
