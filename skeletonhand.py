@@ -11,26 +11,26 @@ def skeleton(img):
     ret, img = cv2.threshold(img, 100, 255, 0)
     element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
     done = False
-
-    while (not done):
+    print(size)
+    print(img.shape)
+    while (True):
         eroded = cv2.erode(img, element)
         temp = cv2.dilate(eroded, element)
         temp = cv2.subtract(img, temp)
         skel = cv2.bitwise_or(skel, temp)
         img = eroded.copy()
-
-        zeros = size - cv2.countNonZero(img)
-        if zeros == size:
-            done = True
+        #the image has completely eroded
+        if (cv2.countNonZero(img)) == 0:
+            break
     return skel
 
 
-img = cv2.imread('assets/hand.jpg', 0)
+img = cv2.imread('hand.jpg', 0)
 plt.subplot(221)
 plt.title('Original image')
 plt.imshow(img, cmap='gray')
 
-bl = cv2.GaussianBlur(img, (3,3),0)
+bl = cv2.GaussianBlur(img, (3, 3), 0)
 plt.subplot(222)
 plt.title('After Gaussian blur')
 plt.imshow(bl, cmap='gray')
