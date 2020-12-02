@@ -1,7 +1,7 @@
 import cv2
 
 # Defining the kernel to be used in Top-Hat
-filterSize = (3, 3)
+filterSize = (5, 5)
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT,
                                    filterSize)
 
