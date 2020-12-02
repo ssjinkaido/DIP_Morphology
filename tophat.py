@@ -6,7 +6,7 @@ kernel = cv2.getStructuringElement(cv2.MORPH_RECT,
                                    filterSize)
 
 # Reading the image named 'input.jpg'
-input_image = cv2.imread("star.png")
+input_image = cv2.imread("assets/star.png")
 input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
 
 # Applying the Top-Hat operation
