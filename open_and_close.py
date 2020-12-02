@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-path = 'alphabet.png'
+path = 'assets/alphabet.png'
 img = cv2.imread(path)
 # img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
