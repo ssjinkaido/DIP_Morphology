@@ -61,10 +61,12 @@ def images_equal(image1, image2):
 def thin(filename):
     last_image = open_image(filename)
     image = thin_helper(last_image.copy(), last_image.load())
+    i=1
     while not images_equal(image, last_image):
-        print("iteration")
+        print("iteration ",i)
         last_image = image.copy()
         image = thin_helper(image, image.load())
+        i+=1
 
     return last_image
 
@@ -77,8 +79,8 @@ def thin_helper(image, image_pixels):
     return image.copy()
 
 
-last_image = thin("kde.png")
-img = cv2.imread("kde.png")
+last_image = thin("assets/kde.png")
+img = cv2.imread("assets/kde.png")
 plt.subplot(121)
 plt.title('Original image')
 plt.imshow(img, cmap='gray')
@@ -88,3 +90,4 @@ plt.title('After Thinning')
 plt.imshow(last_image, cmap='gray')
 
 plt.show()
+
