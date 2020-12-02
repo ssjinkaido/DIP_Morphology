@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 
 def skeleton(img):
-    img = cv2.GaussianBlur(img, (3, 3), 0)
     size = np.size(img)
     skel = np.zeros(img.shape, np.uint8)
 
